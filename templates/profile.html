@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Click to Next</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        #image-container {
+            width: 1024px;
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-image 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+<div id="image-container"></div>
+
+<script>
+    // Array of image paths (from the static folder)
+    const images = [
+        '/static/first.jpg',
+        '/static/second.jpg',
+        '/static/third.jpg',
+        '/static/fourth.jpg',
+        '/static/fifth.jpg',
+        '/static/sixth.png'
+    ];
+
+    let currentIndex = 0;  // Keep track of the current image index
+
+    const imageContainer = document.getElementById('image-container');
+
+    // Function to set the background image
+    function setBackgroundImage(index) {
+        imageContainer.style.backgroundImage = `url(${images[index]})`;
+    }
+
+    // Set the initial background image
+    setBackgroundImage(currentIndex);
+
+    // Add click event to load the next image
+    imageContainer.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;  // Cycle through the images
+        setBackgroundImage(currentIndex);  // Update the background image
+    });
+</script>
+
+</body>
+</html>

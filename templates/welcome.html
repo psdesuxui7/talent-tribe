@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slideshow</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        img {
+            max-width: 100%;  /* Allow images to scale with the viewport */
+            max-height: 90%;  /* Ensure they don't exceed 90% of the height */
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        img.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <img id="image1" src="{{ url_for('static', filename='Frame 1.png') }}" class="active" alt="Image 1">
+    <img id="image2" src="{{ url_for('static', filename='Frame 2.png') }}" alt="Image 2">
+    <img id="image3" src="{{ url_for('static', filename='Frame 3.png') }}" alt="Image 3">
+    <img id="image4" src="{{ url_for('static', filename='Frame 4.png') }}" alt="Image 4">
+
+    <script>
+        const images = document.querySelectorAll('img');
+        let currentImageIndex = 0;
+        const displayDuration = 10000; // 10 seconds
+
+        function showNextImage() {
+            images[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].classList.add('active');
+        }
+
+        setInterval(showNextImage, displayDuration);
+    </script>
+</body>
+</html>
